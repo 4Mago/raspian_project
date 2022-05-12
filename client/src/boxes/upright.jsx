@@ -8,6 +8,7 @@ const UpRight = () => {
 	let displayTime = ''
 	let lineNumber = ''
 	let destination = ''
+	console.log(query)
 
 	if (query.isSuccess == false) {
 		console.log('something went wrong')
@@ -15,16 +16,17 @@ const UpRight = () => {
 
 	else {
 
-		for (let x=0; x<query.data.ResponseData.Buses.length; x++){
-			let displayTime = JSON.stringify(query.data.ResponseData.Buses[x].DisplayTime)
-			let lineNumber = JSON.stringify(query.data.ResponseData.Buses[x].LineNumber)
-			let destination = JSON.stringify(query.data.ResponseData.Buses[x].Destination)
+			let stopAreaName = JSON.stringify(query.data.ResponseData.Buses[0].StopAreaName)
+			// let displayTime = JSON.stringify(query.data.ResponseData.Buses[x].DisplayTime)
+			// let lineNumber = JSON.stringify(query.data.ResponseData.Buses[x].LineNumber)
+			// let destination = JSON.stringify(query.data.ResponseData.Buses[x].Destination)
 
 		
 
 	return (
 	<Container>
 			<>
+			<P>{stopAreaName}</P>
 			<ul>
 			{query.data.ResponseData.Buses.map(function(d, idx){
 				return (<>
@@ -38,7 +40,7 @@ const UpRight = () => {
 		console.log(displayTime)
 		console.log(query)
 	}
-}
+
 
 
 export default UpRight
@@ -49,6 +51,7 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-flow: column;
 `
 
 const Li = styled.li`
@@ -59,3 +62,7 @@ const Li = styled.li`
 	text-decoration: none;
 	list-style: none;
 	`
+
+const P = styled.h1`
+	text-decoration: none;
+`
