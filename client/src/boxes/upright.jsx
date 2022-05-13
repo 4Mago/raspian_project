@@ -7,20 +7,22 @@ const UpRight = () => {
 	const query = useQuery('sl-data', getData, {
 		refetchInterval: 30000,
 	})
-	const { Buses } = query.data.ResponseData
-
 	return (
 		<Container>
-			{query.isLoading && <p>Loading...</p>}
-			{query.isSuccess ? (
+			{query.isLoading ? (
+				<p>Loading...</p>
+			) : query.isSuccess ? (
 				<>
-					<h1>{Buses[0].StopAreaName}</h1>
+					<h1>{query.data.ResponseData.Buses[0].StopAreaName}</h1>
 					<ul>
-						{Buses.map(function (d, idx) {
+						{query.data.ResponseData.Buses.map(function (
+							{ LineNumber, Destination, DisplayTime },
+							idx
+						) {
 							return (
-								<Li
-									key={idx}
-								>{`linje ${d.LineNumber} mot ${d.Destination} går om ${d.DisplayTime}`}</Li>
+								<Li key={idx}>{`linje ${LineNumber} mot ${Destination} går ${
+									DisplayTime === 'Nu' ? DisplayTime : 'om ' + DisplayTime
+								}`}</Li>
 							)
 						})}
 					</ul>
