@@ -2,54 +2,56 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { getData } from '../utils/getData'
 import styled from 'styled-components'
+import Card from '../components/Card'
+
+const MODES = {
+	BUS: 'Buses',
+	TRAIN: 'Trains',
+}
 
 const UpRight = () => {
 	const query = useQuery('sl-data', getData, {
 		refetchInterval: 30000,
 	})
+	const mode = React.useMemo(() => {
+		if (query.data?.ResponseData) {
+			return Object.entries(query.data.ResponseData)
+				.filter(([key]) => Object.values(MODES).includes(key))
+				.map(([, value]) => value)
+		}
+	}, [query.data])
+
 	return (
-		<Container>
+		<Wrapper>
 			{query.isLoading ? (
 				<p>Loading...</p>
 			) : query.isSuccess ? (
-				<>
-					<h1>{query.data.ResponseData.Buses[0].StopAreaName}</h1>
-					<ul>
-						{query.data.ResponseData.Buses.map(function (
-							{ LineNumber, Destination, DisplayTime },
-							idx
-						) {
-							return (
-								<Li key={idx}>{`linje ${LineNumber} mot ${Destination} går ${
-									DisplayTime === 'Nu' ? DisplayTime : 'om ' + DisplayTime
-								}`}</Li>
-							)
-						})}
-					</ul>
-				</>
+				<Grid>
+					{mode.map((mode, idx) => (
+						<Card key={idx} mode={mode} />
+					))}
+				</Grid>
 			) : (
 				<p>Error</p>
 			)}
-		</Container>
+		</Wrapper>
 	)
 }
 
 export default UpRight
 
-const Container = styled.div`
-	height: 100%;
-	width: 100%;
+const Wrapper = styled.div`
 	display: flex;
+	width: 100%;
+	height: 100vh;
 	align-items: center;
 	justify-content: center;
-	flex-flow: column;
-	color: #fff;
 `
 
-const Li = styled.li`
-	margin: 5px;
-	padding: 5px;
-	font-weight: 500;
-	text-decoration: none;
-	list-style: none;
+const Grid = styled.div`
+	display: grid;
+	grid-gap: 15px;
+	grid-template-columns: 1fr 1fr;
+	align-items: start;
+	min-height: 250px;
 `
