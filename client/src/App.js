@@ -8,15 +8,13 @@ const queryClient = new QueryClient()
 function App() {
 	return (
 		<>
-		<Body>
-		<UpContainer>
-
-		<QueryClientProvider client={queryClient}>
-			<UpRight />
-		</QueryClientProvider>
-
-		</UpContainer>
-		</Body>
+			<Body>
+				<UpContainer>
+					<QueryClientProvider client={queryClient}>
+						<UpRight />
+					</QueryClientProvider>
+				</UpContainer>
+			</Body>
 		</>
 	)
 }
@@ -33,10 +31,7 @@ const Body = styled.div`
 `
 
 const UpContainer = styled.div`
-	width:60%;
+	width: 60%;
 	height: 100%;
-	/* display: flex;
-	align-items: center;
-	justify-content: center; */
-	background-color: #00009B;
+	background-color: #00009b;
 `
