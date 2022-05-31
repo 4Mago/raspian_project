@@ -28,6 +28,10 @@ const Body = styled.div`
 	align-items: center;
 	justify-content: center;
 	background-color: #00009b;
+	box-sizing: border-box;
+	overflow-y: hidden; /* Hide vertical scrollbar */
+	overflow-x: hidden; /* Hide horizontal scrollbar */
+
 `
 
 const UpContainer = styled.div`
