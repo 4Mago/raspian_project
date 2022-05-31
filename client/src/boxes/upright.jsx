@@ -50,8 +50,10 @@ const Wrapper = styled.div`
 
 const Grid = styled.div`
 	display: grid;
-	grid-gap: 15px;
-	grid-template-columns: 1fr 1fr;
+	grid-gap: 0;
+	grid-template-columns: 48% 52%;
 	align-items: start;
-	min-height: 250px;
+	height: 90%;
+	width: 98%;
+	padding-left:2%; 
 `

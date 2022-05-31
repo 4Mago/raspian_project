@@ -22,16 +22,16 @@ function App() {
 export default App
 
 const Body = styled.div`
-	width: 100%;
-	height: 100vh;
+	width:640px;
+	height:480px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: darkblue;
+	background-color: #00009b;
 `
 
 const UpContainer = styled.div`
-	width: 60%;
-	height: 100%;
+	width: 100%;
+	height: 75%;
 	background-color: #00009b;
 `

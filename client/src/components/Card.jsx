@@ -9,18 +9,20 @@ const Card = ({ mode }) => {
 				<>
 					<HeaderContainer>
 						{mode[0].TransportMode === 'BUS' ? <BusIcon /> : <TrainIcon />}
-						<h1>{mode[0].StopAreaName}</h1>
+						<h3>{mode[0].StopAreaName}</h3>
 					</HeaderContainer>
 
-					<ul>
+					<Ul>
 						{mode.map(function ({ LineNumber, Destination, DisplayTime }, idx) {
 							return (
-								<Li key={idx}>{`linje ${LineNumber} mot ${Destination} går ${
+								<Li key={idx}>{`${LineNumber} mot ${
+									Destination === 'Södertälje centrum' ? 'Södertälje C' : Destination
+								} går ${
 									DisplayTime === 'Nu' ? 'nu' : 'om ' + DisplayTime
 								}`}</Li>
 							)
 						})}
-					</ul>
+					</Ul>
 				</>
 			)}
 		</Container>
@@ -28,6 +30,9 @@ const Card = ({ mode }) => {
 }
 
 const Container = styled.div`
+	width:100%;
+	height:100%;
+	max-width: 300px;
 	display: flex;
 	flex-flow: column;
 	color: #fff;
@@ -37,24 +42,31 @@ const BusIcon = styled(Bus)`
 	fill: #fff;
 	width: 50px;
 	height: auto;
-	margin-right: 15px;
+	margin: 0 15px 0 8px;
 `
 const TrainIcon = styled(Train)`
 	fill: #fff;
 	width: 50px;
 	height: auto;
-	margin-right: 15px;
+	margin: 0 15px 0 8px;
 `
 
 const HeaderContainer = styled.div`
 	display: flex;
 `
 
+const Ul = styled.ul`
+	margin: 0;
+	padding: 50px 0 0 0;
+`
+
 const Li = styled.li`
 	margin: 5px;
 	padding: 5px;
+	font-size: 18px;
 	font-weight: 500;
 	text-decoration: none;
 	list-style: none;
+	width: 300px; 
 `
 export default Card
